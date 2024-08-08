@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quizz_app/data/questions.dart';
 import 'package:quizz_app/pages/question_screen.dart';
 import 'package:quizz_app/pages/start_screen.dart';
 
@@ -10,7 +11,7 @@ class Quiz extends StatefulWidget {
 }
 
 class _QuizState extends State<Quiz> {
-  final List<String> selectedAnswers = [];  //* Danh sách câu trả lời đã chọn và câu trả lời đúng sẽ được thêm vào list
+  List<String> selectedAnswers = []; //* Danh sách câu trả lời đã chọn và câu trả lời đúng sẽ được thêm vào list
   // Widget? activeScreen;
   var activeScreen = 'start-screen';
 
@@ -28,8 +29,16 @@ class _QuizState extends State<Quiz> {
   }
 
   //* Hàm này sẽ được gọi khi người dùng chọn một câu trả lời
-  void chooseAnswer(String answer){
+  void chooseAnswer(String answer) {
     selectedAnswers.add(answer); //* Thêm câu trả lời vào danh sách câu trả lời đã chọn mà không thêm vào danh sách
+
+    //* So sánh độ dài selectedAsnwer đã chọn với độ dài của danh sách questions
+    if (selectedAnswers.length == questions.length) {
+      setState(() {
+        activeScreen = 'start-screen';
+        selectedAnswers.clear(); //* Xóa danh sách câu trả lời đã chọn
+      });
+    }
   }
 
   @override
