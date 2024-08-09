@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:quizz_app/data/questions.dart';
 import 'package:quizz_app/pages/questions_summary.dart';
 
@@ -12,12 +13,15 @@ class ResultsScreen extends StatelessWidget {
 
     for (var i = 0; i < chosenAnswers.length; i++) {
       summary.add({
-        'question_index': i, //* Lấy index của câu hỏi
-        'question': questions[i].text, //* Lấy câu hỏi từ danh sách câu hỏi
-        'correct_answer': questions[i]
-            .answers[0], //* Lấy câu trả lời đúng từ danh sách câu trả lời
-        'user_answer': chosenAnswers[
-            i], //* Lấy câu trả lời của người dùng từ danh sách câu trả lời đã chọn
+        //* Lấy index của câu hỏi
+        'question_index': i,
+
+        //* Lấy câu hỏi từ danh sách câu hỏi
+        'question': questions[i].text,
+        //* Lấy câu trả lời đúng từ danh sách câu trả lời
+        'correct_answer': questions[i].answers[0],
+        //* Lấy câu trả lời của người dùng từ danh sách câu trả lời đã chọn
+        'user_answer': chosenAnswers[i],
       });
     }
 
@@ -39,7 +43,13 @@ class ResultsScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('You answered $numberCorrectAnswers out of $numberTotalQuestions questions correctly!'),
+            Text(
+                'You answered $numberCorrectAnswers out of $numberTotalQuestions questions correctly!',
+                textAlign: TextAlign.center,
+                style: GoogleFonts.lato(
+                    color: const Color.fromARGB(255, 237, 223, 252),
+                    fontSize: 20,
+                    fontStyle: FontStyle.italic)),
             const SizedBox(
               height: 30,
             ),
@@ -47,7 +57,15 @@ class ResultsScreen extends StatelessWidget {
             const SizedBox(
               height: 30,
             ),
-            TextButton(onPressed: () {}, child: const Text('Try again!')),
+            OutlinedButton.icon(
+                onPressed: () {},
+                style: OutlinedButton.styleFrom(
+                  foregroundColor: Colors.white,
+                ),
+                icon: const Icon(Icons.restart_alt),
+                label: const Text(
+                  "Try Again!",
+                )),
           ],
         ),
       ),
