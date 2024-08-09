@@ -12,7 +12,8 @@ class Quiz extends StatefulWidget {
 }
 
 class _QuizState extends State<Quiz> {
-  List<String> selectedAnswers = []; //* Danh sách câu trả lời đã chọn và câu trả lời đúng sẽ được thêm vào list
+  //* Danh sách câu trả lời đã chọn và câu trả lời đúng sẽ được thêm vào list
+  List<String> selectedAnswers = [];
   var activeScreen = 'start-screen';
 
   void switchScreen() {
@@ -22,14 +23,14 @@ class _QuizState extends State<Quiz> {
   }
 
   //* Hàm này sẽ được gọi khi người dùng chọn một câu trả lời
+  //* Thêm câu trả lời vào danh sách câu trả lời đã chọn mà không thêm vào danh sách
   void chooseAnswer(String answer) {
-    selectedAnswers.add(answer); //* Thêm câu trả lời vào danh sách câu trả lời đã chọn mà không thêm vào danh sách
+    selectedAnswers.add(answer);
 
     //* So sánh độ dài selectedAsnwer đã chọn với độ dài của danh sách questions
     if (selectedAnswers.length == questions.length) {
       setState(() {
         activeScreen = 'results-screen';
-        selectedAnswers.clear(); //* Xóa danh sách câu trả lời đã chọn
       });
     }
   }
@@ -47,7 +48,9 @@ class _QuizState extends State<Quiz> {
     //* Kiểm tra xem activeScreen có phải là 'results-screen' không
     //* Nếu có, thì sẽ hiển thị ResultsScreen
     if (activeScreen == 'results-screen') {
-      screenWidget = ResultsScreen(chosenAnswers: selectedAnswers,); //* Truyền danh sách selectedAnswers vào ResultsScreen
+      screenWidget = ResultsScreen(
+        chosenAnswers: selectedAnswers,
+      ); //* Truyền danh sách selectedAnswers vào ResultsScreen
     }
 
     return MaterialApp(
