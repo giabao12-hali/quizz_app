@@ -7,15 +7,17 @@ class ResultsScreen extends StatelessWidget {
 
   final List<String> chosenAnswers;
 
-  List<Map<String, Object>> getSummaryData(){
+  List<Map<String, Object>> getSummaryData() {
     final List<Map<String, Object>> summary = [];
 
-    for (var i = 0; i < chosenAnswers.length; i++){
+    for (var i = 0; i < chosenAnswers.length; i++) {
       summary.add({
         'question_index': i, //* Lấy index của câu hỏi
         'question': questions[i].text, //* Lấy câu hỏi từ danh sách câu hỏi
-        'correct_answer': questions[i].answers[0], //* Lấy câu trả lời đúng từ danh sách câu trả lời
-        'user_answer': chosenAnswers[i], //* Lấy câu trả lời của người dùng từ danh sách câu trả lời đã chọn
+        'correct_answer': questions[i]
+            .answers[0], //* Lấy câu trả lời đúng từ danh sách câu trả lời
+        'user_answer': chosenAnswers[
+            i], //* Lấy câu trả lời của người dùng từ danh sách câu trả lời đã chọn
       });
     }
 
@@ -24,6 +26,12 @@ class ResultsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final summaryData = getSummaryData();
+    final numberTotalQuestions = questions.length;
+    final numberCorrectAnswers = summaryData.where((data) {
+      return data['user_answer'] == data['correct_answer'];
+    }).length;
+
     return SizedBox(
       width: double.infinity,
       child: Container(
@@ -31,11 +39,11 @@ class ResultsScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text('You answered X out of Y questions correctly!'),
+            Text('You answered $numberCorrectAnswers out of $numberTotalQuestions questions correctly!'),
             const SizedBox(
               height: 30,
             ),
-            QuestionsSummary(getSummaryData()), 
+            QuestionsSummary(summaryData),
             const SizedBox(
               height: 30,
             ),
