@@ -19,8 +19,10 @@ class ResultsScreen extends StatelessWidget {
 
         //* Lấy câu hỏi từ danh sách câu hỏi
         'question': questions[i].text,
+
         //* Lấy câu trả lời đúng từ danh sách câu trả lời
         'correct_answer': questions[i].answers[0],
+        
         //* Lấy câu trả lời của người dùng từ danh sách câu trả lời đã chọn
         'user_answer': chosenAnswers[i],
       });

@@ -26,12 +26,12 @@ class _QuestionScreenState extends State<QuestionScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final currentQuestion = questions[
-        currentQuestionIndex]; //* Lấy câu hỏi đầu tiên từ danh sách câu hỏi
+    //* Lấy câu hỏi đầu tiên từ danh sách câu hỏi
+    final currentQuestion = questions[currentQuestionIndex]; 
 
     return SizedBox(
-      width: double
-          .infinity, //* double.infinity có nghĩa là chiều rộng sẽ bằng với chiều rộng của màn hình
+      //* double.infinity có nghĩa là chiều rộng sẽ bằng với chiều rộng của màn hình
+      width: double.infinity, 
       child: Container(
         margin: const EdgeInsets.all(40),
         child: Column(

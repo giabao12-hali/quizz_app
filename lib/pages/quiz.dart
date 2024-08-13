@@ -26,7 +26,6 @@ class _QuizState extends State<Quiz> {
   //* Thêm câu trả lời vào danh sách câu trả lời đã chọn mà không thêm vào danh sách
   void chooseAnswer(String answer) {
     selectedAnswers.add(answer);
-
     //* So sánh độ dài selectedAsnwer đã chọn với độ dài của danh sách questions
     if (selectedAnswers.length == questions.length) {
       setState(() {
@@ -37,6 +36,8 @@ class _QuizState extends State<Quiz> {
 
   void restartQuiz() {
     setState(() {
+      //* Xóa danh sách selectedAnswers để khi reset không còn list các câu trả lời cũ
+      selectedAnswers = [];
       activeScreen = 'question-screen';
     });
   }
